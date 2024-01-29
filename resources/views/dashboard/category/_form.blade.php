@@ -10,5 +10,6 @@
     <input class="form-control" {{ $category->slug == '' ? "" : 'readonly' }} type="text" value="{{old('slug', $category->slug)}}" name="slug">
 </div>
 
-<br>
-<button class="btn btn-info" type="submit">Enviar</button>
+<a class="btn btn-warning my-3" href="{{ route('category.index') }}">Cancelar</a>
+
+<button class="btn btn-success mt-3" type="submit">Enviar</button>

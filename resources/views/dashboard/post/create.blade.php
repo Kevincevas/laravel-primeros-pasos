@@ -4,8 +4,8 @@
 
     @include('dashboard.fragment._errors-form')
         
-    <div class="row">
-        <div class="col-md-12 text-center">
+    <div class="">
+        <div class="text-center">
             <h1>Crear Post</h1>
         </div>
     </div>

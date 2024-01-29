@@ -47,5 +47,6 @@
     </div>
 @endif
 
-<br>
-<button class="btn btn-info" type="submit">Enviar</button>
+<a class="btn btn-warning my-3" href="{{ route('post.index') }}">Cancelar</a>
+
+<button class="btn btn-success mt-3" type="submit">Enviar</button>

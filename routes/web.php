@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,15 +16,44 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/', function(){
+Route::get('/', function () {
     return view('welcome');
 });
 
-// Ruta de tipo recurso: co ntiene las rutas de tipo crud en una sola linea de codigo
-Route::resource('post', PostController::class);
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('category', CategoryController::class);
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() { //middelware para proteger la ruta
+    
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::resources([
+        'post' => PostController::class,
+        'category' => CategoryController::class,
+    ]);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
+
+// Ruta de tipo recurso: contiene las rutas de tipo crud en una sola linea de codigo
+// Route::resource('post', PostController::class);
+// Route::resource('category', CategoryController::class);
+
+// Rutas de tipo recurso, mas de una 
+// Route::resources([
+//     'post' => PostController::class,
+//     'category' => CategoryController::class,
+// ]);
 
 // Rutas tradicionales
 // Route::get('post', [PostController::class, 'index']);
