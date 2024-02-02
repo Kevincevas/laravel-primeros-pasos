@@ -24,7 +24,7 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function() { //middelware para proteger la ruta
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth',"admin"]], function() { //middelware para proteger la ruta
     
     Route::get('/', function () {
         return view('dashboard');
