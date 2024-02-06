@@ -20,7 +20,7 @@ class PostSeeder extends Seeder
         Post::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         
-        for ($i=1; $i < 20; $i++) { 
+        for ($i=0; $i < 20; $i++) { 
             $c = Category::inRandomOrder()->first();
 
             $title = Str::random(20);

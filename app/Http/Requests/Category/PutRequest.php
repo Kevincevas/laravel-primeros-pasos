@@ -3,6 +3,8 @@
 namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class PutRequest extends FormRequest
 {
@@ -12,6 +14,16 @@ class PutRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    //API 
+    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        if($this->expectsJson())
+        {
+            $response = new Response($validator->errors(), 400);
+            throw new ValidationException($validator, $response);
+        }
     }
 
     /**

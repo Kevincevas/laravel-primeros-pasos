@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\Validation\Validator;
 
 class StoreRequest extends FormRequest
 {
@@ -20,6 +23,18 @@ class StoreRequest extends FormRequest
             "slug" => "required|min:5|max:255|unique:categories",
         ];
     }
+
+    //API 
+    public function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        if($this->expectsJson())
+        {
+            $response = new Response($validator->errors(), 400);
+            throw new ValidationException($validator, $response);
+        }
+    }
+
+
     /**
      * Determine if the user is authorized to make this request.
      */
