@@ -54,6 +54,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+// {n1?}: especificamos el argumento dinamicamente, puede estar o no
+Route::get('/vue/{n1?}/{n2?}', function(){
+    return view('vue');
+});
+
+
 require __DIR__.'/auth.php';
 
 

@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(3);
+        $posts = Post::paginate(10);
         echo view('dashboard.post.index', compact('posts'));
     }
 

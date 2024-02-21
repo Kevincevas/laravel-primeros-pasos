@@ -35,7 +35,7 @@ class PutRequest extends FormRequest
     {
         return [
              "title" => "required|min:5|max:500",
-             "slug" => "required|min:5|max:500|unique:posts,slug,".$this->route('post')->id, //indica que el slug del post no sea tomado por otro registro
+             "slug" => "|min:5|max:500|unique:posts,slug,".$this->route('post')->id, //indica que el slug del post no sea tomado por otro registro
              "content" => "required|min:10",
              "category_id" => "required",
              "description" => "required|min:10",
